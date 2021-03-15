@@ -1,0 +1,162 @@
+1. Gene name.
+2. Number of proteome hits in common.
+3. Proteome hits in common relative to the proteome size.
+4. A list of the proteome hits in common.
+
+
+---------------
+
+
+1. GRIK2
+17
+17.0
+{'GRIK2', 'PICK1', 'GRIA1', 'SDCBP', 'DLG1', 'PARK2', 'GRIP1', 'HNRNPL', 'DLG4', 'GRIK5', 'KIAA1429', 'FASN', 'CALCOCO1', 'GRID2', 'TRIM25', 'GRIA2', 'DLG3'}
+
+
+---------------
+
+
+2. GRID2
+5
+3.125
+{'GRIK2', 'GRIA1', 'GRIK5', 'GRID2', 'GRIA2'}
+
+
+---------------
+
+
+3. GRIA1
+8
+2.3703703703703702
+{'GRIK2', 'PICK1', 'GRIA1', 'SDCBP', 'DLG1', 'GRIP1', 'GRID2', 'GRIA2'}
+
+
+---------------
+
+
+4. GRIK5
+5
+2.0833333333333335
+{'GRIK2', 'DLG4', 'GRIK5', 'GRID2', 'DLG3'}
+
+
+---------------
+
+
+5. GRIA2
+8
+1.8823529411764706
+{'GRIK2', 'PICK1', 'GRIA1', 'SDCBP', 'GRIP1', 'DLG4', 'GRID2', 'GRIA2'}
+
+
+---------------
+
+
+6. DLG1
+6
+0.3711340206185567
+{'GRIK2', 'GRIA1', 'DLG1', 'PARK2', 'HNRNPL', 'DLG3'}
+
+
+---------------
+
+
+7. DLG4
+6
+0.36363636363636365
+{'GRIK2', 'PARK2', 'DLG4', 'GRIK5', 'GRIA2', 'DLG3'}
+
+
+---------------
+
+
+8. DLG3
+5
+0.3205128205128205
+{'GRIK2', 'DLG1', 'DLG4', 'GRIK5', 'DLG3'}
+
+
+---------------
+
+
+9. GRIP1
+4
+0.2711864406779661
+{'GRIK2', 'GRIA1', 'GRIA2', 'GRIP1'}
+
+
+---------------
+
+
+10. CALCOCO1
+3
+0.18367346938775508
+{'GRIK2', 'HNRNPL', 'CALCOCO1'}
+
+
+---------------
+
+
+11. PARK2
+6
+0.0759493670886076
+{'GRIK2', 'PICK1', 'PARK2', 'DLG1', 'HNRNPL', 'DLG4'}
+
+
+---------------
+
+
+12. PICK1
+5
+0.06443298969072164
+{'GRIK2', 'PICK1', 'GRIA1', 'PARK2', 'GRIA2'}
+
+
+---------------
+
+
+13. SDCBP
+4
+0.04419889502762431
+{'GRIK2', 'SDCBP', 'GRIA1', 'GRIA2'}
+
+
+---------------
+
+
+14. HNRNPL
+5
+0.026096033402922755
+{'GRIK2', 'DLG1', 'HNRNPL', 'PARK2', 'TRIM25'}
+
+
+---------------
+
+
+15. FASN
+4
+0.017857142857142856
+{'GRIK2', 'FASN', 'PARK2', 'KIAA1429'}
+
+
+---------------
+
+
+16. TRIM25
+3
+0.009977827050997782
+{'GRIK2', 'TRIM25', 'HNRNPL'}
+
+
+---------------
+
+
+17. KIAA1429
+0
+0.0
+set()
+
+
+---------------
+
+
