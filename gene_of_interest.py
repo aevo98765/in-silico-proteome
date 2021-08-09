@@ -5,7 +5,7 @@ from operator import itemgetter
 class GeneOfInterest:
 
     def poi_proteome(self, gene_name, organism):
-        biogrid_access_key = "160c9d5820c29e02dca794cacdbdee5f"
+        biogrid_access_key = ""
 
         url = "https://webservice.thebiogrid.org/interactions?searchNames=true&geneList=" + gene_name + "&includeInteractors=true&format=json&max=1000&includeInteractorInteractions=false&taxId=" + organism + "&accesskey=" + biogrid_access_key
 
