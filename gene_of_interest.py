@@ -46,6 +46,7 @@ def proteome_comparison(poi_proteome, organism):
             pass
         try:
             proportion_times_number_in_common = length_of_list * proportion_in_common
+            proportion_times_number_in_common = round(proportion_times_number_in_common, 2)
         except:
             pass
 

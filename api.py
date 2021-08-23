@@ -11,6 +11,10 @@ from email import encoders
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.mime.application import MIMEApplication
+from os.path import basename
+
+
 
 
 # user_put_args = reqparse.RequestParser()
@@ -23,16 +27,17 @@ from email.mime.text import MIMEText
 #     if question_id not in questions:
 #         abort(404, message="Question id is not valid.")
 
-def send_mail(send_from, send_to, subject, text, file=None, server="localhost"):
+def send_mail(send_to, subject, text, file_name=None, server="localhost"):
     email = "ashevans3000@gmail.com"
     password = "test3000"
     reciever_email = "ashevans3@gmail.com"
     print(email)
-    msg=EmailMessage()
-    msg['Subject'] = 'AR'
+    msg = EmailMessage()
+    msg['Subject'] = subject
     msg['From'] = email
     msg['To'] = reciever_email
-    msg.set_content('Ok it works')
+    msg.set_content(text)
+
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
         smtp.login(email, password)
         print("Logged in")
@@ -40,30 +45,29 @@ def send_mail(send_from, send_to, subject, text, file=None, server="localhost"):
         print("email sent")
 
 def sys_out(gene_choice: str, organism_choice: str, list_in_common: list):
-    original_stout = sys.stdout
-    file_name: str = gene_choice + "_" + organism_choice
-    with open(file_name, "w") as f:
-        sys.stdout = f
-        print("1. Gene name.")
-        print("2. Number of proteome hits in common.")
-        print("3. Proteome hits in common relative to the proteome size.")
-        print("4. A list of the proteome hits in common.")
-        print("\n")
-        print("---------------")
-        print("\n")
-
-        index = 0
-        for gene in list_in_common:
-            index += 1
-            print(str(index) + ".", end=" ")
-            for e in gene:
-                print(e)
-            print("\n")
-            print("---------------")
-            print("\n")
-        sys.stdout = original_stout
-        print("Complete! Check the files.")
-        return file_name
+    results = """
+    1. Gene name.\n
+    2. Number of proteome hits in common.\n
+    3. Proteome hits in common relative to the proteome size.\n
+    4. A list of the proteome hits in common.\n
+    \n
+    ---------------
+    \n
+    """
+    print(list_in_common)
+    index = 0
+    for gene in list_in_common:
+        index += 1
+        print(index)
+        results += str(index) + "."
+        for e in gene:
+            results += (str(e) + ",\n")
+        results += "\n"
+        results += "---------------"
+        results += "\n"
+    print(results)
+    print("Complete!")
+    return results
 
 class Proteome(Resource):
 
@@ -72,10 +76,11 @@ class Proteome(Resource):
         print(gene_name)
         print(species_id)
         print(email)
+        subject_string = gene_name + " results"
         proteome = poi_proteome(gene_name, species_id)
         list_in_common = proteome_comparison(proteome, species_id)
-        file_name = sys_out(gene_name, species_id, list_in_common)
-        send_mail(email, email, "results", "This has worked")
+        results = sys_out(gene_name, species_id, list_in_common)
+        send_mail(email, subject_string, results)
 
 
 
