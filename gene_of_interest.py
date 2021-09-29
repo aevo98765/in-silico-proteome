@@ -11,13 +11,13 @@ def poi_proteome(gene_name: str, organism: str):
     with urllib.request.urlopen(url) as url:
         datas = json.loads(url.read().decode())
 
-    poi_proteome = set()
+    poi_proteome = {}
 
     for data in datas:
         a = datas[data]["OFFICIAL_SYMBOL_A"].upper()
         b = datas[data]["OFFICIAL_SYMBOL_B"].upper()
-        poi_proteome.add(a)
-        poi_proteome.add(b)
+        poi_proteome[a] = 1
+        poi_proteome[b] = 1
 
     print(gene_name, "has", len(poi_proteome), "number of hits in the in silico proteome. Please wait...")
 
@@ -26,22 +26,22 @@ def poi_proteome(gene_name: str, organism: str):
 def proteome_comparison(poi_proteome, organism):
     lists_in_common = []
     for gene in poi_proteome:
-        url = url = "https://webservice.thebiogrid.org/interactions?searchNames=true&geneList=" + gene + "&includeInteractors=true&format=json&max=1000&includeInteractorInteractions=false&taxId=" + organism + "&accesskey=160c9d5820c29e02dca794cacdbdee5f"
+        url = "https://webservice.thebiogrid.org/interactions?searchNames=true&geneList=" + gene + "&includeInteractors=true&format=json&max=1000&includeInteractorInteractions=false&taxId=" + organism + "&accesskey=160c9d5820c29e02dca794cacdbdee5f"
         with urllib.request.urlopen(url) as url:
             datas = json.loads(url.read().decode())
-        list_general = set()
+        gene_dict = {}
         list_in_common = set()
         for data in datas:
             a = datas[data]["OFFICIAL_SYMBOL_A"].upper()
             b = datas[data]["OFFICIAL_SYMBOL_B"].upper()
-            list_general.add(a)
-            list_general.add(b)
+            gene_dict[a] = 1
+            gene_dict[b] = 1
             if a in poi_proteome and b in poi_proteome:
                 list_in_common.add(a)
                 list_in_common.add(b)
         length_of_list = len(list_in_common)
         try:
-            proportion_in_common = len(list_in_common) / len(list_general)
+            proportion_in_common = len(list_in_common) / len(gene_dict)
         except:
             pass
         try:

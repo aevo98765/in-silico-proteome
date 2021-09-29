@@ -2,10 +2,10 @@ import smtplib
 from email.message import EmailMessage
 
 
-def send_mail(send_to, subject, text, file_name=None, server="localhost"):
+def send_mail(send_to, subject, text):
     email = "ashevans3000@gmail.com"
     password = "test3000"
-    reciever_email = "ashevans3@gmail.com"
+    reciever_email = send_to
     print(email)
     msg = EmailMessage()
     msg['Subject'] = subject
@@ -21,7 +21,7 @@ def send_mail(send_to, subject, text, file_name=None, server="localhost"):
 
 def result_generation(gene_choice: str, organism_choice: str, list_in_common: list):
     results = f"""
-    Results for Gene:{gene_choice}, Organism ID: {organism_choice}.
+    Results for Gene: {gene_choice}, Organism ID: {organism_choice}.
     1. Gene name.\n
     2. Number of proteome hits in common.\n
     3. Proteome hits in common relative to the proteome size.\n
