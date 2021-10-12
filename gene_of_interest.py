@@ -1,4 +1,4 @@
-import json
+import json, urllib
 import requests
 from operator import itemgetter
 
@@ -10,6 +10,7 @@ def poi_proteome(gene_name: str, organism: str):
     url = "https://webservice.thebiogrid.org/interactions?searchNames=true&geneList=" + gene_name + "&includeInteractors=true&format=json&max=1000&includeInteractorInteractions=false&taxId=" + organism + "&accesskey=" + biogrid_access_key
 
     response = requests.get(url)
+    print(response.status_code)
     datas = response.json()
 
     poi_proteome = {}
@@ -26,12 +27,19 @@ def poi_proteome(gene_name: str, organism: str):
 
 def proteome_comparison(poi_proteome, organism):
     lists_in_common = []
+    gene_number = 0
     for gene in poi_proteome:
+        gene_number += 1
+        print(gene_number)
         url = "https://webservice.thebiogrid.org/interactions?searchNames=true&geneList=" + gene + "&includeInteractors=true&format=json&max=1000&includeInteractorInteractions=false&taxId=" + organism + "&accesskey=160c9d5820c29e02dca794cacdbdee5f"
-        with urllib.request.urlopen(url) as url:
-            datas = json.loads(url.read().decode())
+
+        response = requests.get(url)
+        print(response.status_code)
+        datas = response.json()
+
         gene_dict = {}
         list_in_common = set()
+
         for data in datas:
             a = datas[data]["OFFICIAL_SYMBOL_A"].upper()
             b = datas[data]["OFFICIAL_SYMBOL_B"].upper()

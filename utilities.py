@@ -1,23 +1,58 @@
 import smtplib
+import boto3
+from botocore.exceptions import ClientError
 from email.message import EmailMessage
 
 
 def send_mail(send_to, subject, text):
-    email = "ashevans3000@gmail.com"
-    password = "test3000"
-    reciever_email = send_to
-    print(email)
-    msg = EmailMessage()
-    msg['Subject'] = subject
-    msg['From'] = email
-    msg['To'] = reciever_email
-    msg.set_content(text)
+    SENDER = "ashevans3000@gmail.com"
+    RECIPIENT = send_to
+    AWS_REGION = "eu-west-2"
+    SUBJECT = subject
+    BODY_TEXT = text
+    CHARSET = "UTF-8"
 
-    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-        smtp.login(email, password)
-        print("Logged in")
-        smtp.send_message(msg)
-        print("email sent")
+    client = boto3.client('ses', region_name = AWS_REGION)
+
+    try:
+        response = client.send_email(
+            Destination={
+                'ToAddresses': [
+                    RECIPIENT
+                ],
+            },
+            Message={
+                'Body': {
+                    'Text': {
+                        'Charset': CHARSET,
+                        'Data': BODY_TEXT,
+                    },
+                },
+                'Subject': {
+                    'Charset': CHARSET,
+                    'Data': SUBJECT,
+                },
+            },
+            Source=SENDER
+        )
+    except ClientError as e:
+        print(e.response['Error']['Message'])
+    else:
+        print("Email sent! Message ID:")
+        print(response['MessageId'])
+
+
+    # msg = EmailMessage()
+    # msg['Subject'] = subject
+    # msg['From'] = email
+    # msg['To'] = receiver_email
+    # msg.set_content(text)
+    #
+    # with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+    #     smtp.login(email, password)
+    #     print("Logged in")
+    #     smtp.send_message(msg)
+    #     print("email sent")
 
 def result_generation(gene_choice: str, organism_choice: str, list_in_common: list):
     results = f"""
