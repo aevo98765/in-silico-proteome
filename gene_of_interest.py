@@ -1,4 +1,5 @@
-import urllib.request, json
+import json
+import requests
 from operator import itemgetter
 
 
@@ -8,8 +9,8 @@ def poi_proteome(gene_name: str, organism: str):
 
     url = "https://webservice.thebiogrid.org/interactions?searchNames=true&geneList=" + gene_name + "&includeInteractors=true&format=json&max=1000&includeInteractorInteractions=false&taxId=" + organism + "&accesskey=" + biogrid_access_key
 
-    with urllib.request.urlopen(url) as url:
-        datas = json.loads(url.read().decode())
+    response = requests.get(url)
+    datas = response.json()
 
     poi_proteome = {}
 
