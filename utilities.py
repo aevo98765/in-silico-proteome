@@ -1,7 +1,5 @@
-import smtplib
 import boto3
 from botocore.exceptions import ClientError
-from email.message import EmailMessage
 
 
 def send_mail(send_to, subject, text):
